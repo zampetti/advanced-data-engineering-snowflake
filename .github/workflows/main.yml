@@ -16,6 +16,7 @@ jobs:
     # Only run when PR is merged or on direct push to environment branches
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
+    environment: "Snowflake User Secrets"
 
     env:
       # Read connection secret
@@ -47,9 +48,9 @@ jobs:
 
       # Install Snowflake CLI GitHub Action and point to config file
       - name: Install SnowflakeCLI
-        uses: snowflakedb/snowflake-cli-action@v1.5
+        uses: snowflakedb/snowflake-cli-action@v2.0
         with:
-          cli-version: "latest"
+          cli-version: "3.11"
           default-config-file-path: "config.toml"
 
       # Fetch latest changes from the repository to Snowflake
